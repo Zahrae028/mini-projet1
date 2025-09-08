@@ -68,6 +68,7 @@ int main(){
             break;
 
         default:
+            printf("Choix invalide, veuillez reessayer.\n");
             break;
         }
 
@@ -75,7 +76,7 @@ int main(){
     } while (option!=0);
     
 
-    printf("Merci d'avoir utilise le programme. Au revoir !");
+    printf("Merci d'avoir utilise le programme. Au revoir !\n");
 
     return 0;
 }
@@ -99,7 +100,7 @@ void saisirNotes(){
 
     if (c>100)
     {
-        printf("Vous avez dépassé le nombre de places disponibles");
+        printf("Vous avez depasse le nombre de places disponibles!!! \n");
     }
     else{
 
@@ -111,14 +112,15 @@ void saisirNotes(){
     
         printf("note numero %d :",i+1);
         scanf("%f",&notes[i]);
-        count++;
+        
 
         if (notes[i]<0 || notes[i]>20)
         {
-            printf("Valeur invalide : la note ne peut pas être inférieure à 0 ni supérieure à 20.");
+            printf("Valeur invalide : la note ne peut pas etre inferieure a 0 ni superieure a 20.\n");
         }
         
         } while (notes[i]<0 || notes[i]>20);
+        count++;
     }
     }
     }
@@ -193,10 +195,23 @@ void trouverMin(){
 
 
 void ajouterNote(){
-
-    printf("note numero %d :",count+1);
+    if (count>=100)
+    {
+        printf("!!!Plus de places disponibles!!!\n");
+    }
+    else{
+        do{
+        printf("note numero %d :",count+1);
         scanf("%f",&notes[count]);
+
+        if (notes[count]<0 || notes[count]>20)
+        {
+            printf("Valeur invalide : la note ne peut pas etre inferieure a 0 ni superieure a 20.\n");
+        }
+        
+        } while (notes[count]<0 || notes[count]>20);
         count++;
+    }
 }
 
 void modifierNote(){
@@ -211,11 +226,11 @@ void modifierNote(){
     printf("Choisissez la note a modifier :");
     scanf("%d",&n);
 
-    if (n>count || n<0)
+    if (n>count || n<=0)
     {
         printf("Indice invalide. Veuillez entrer un indice entre 0 et %d.\n",count);
     }
-    } while (n>count || n<0);
+    } while (n>count || n<=0);
 
     
     do
@@ -228,7 +243,7 @@ void modifierNote(){
             printf("Valeur invalide : la note ne peut pas être inferieure à 0 ni superieure a 20.");
         }
         
-        } while (notes[n]<0 || notes[n]>20);
+        } while (notes[n-1]<0 || notes[n-1]>20);
 }
 
 
@@ -239,16 +254,16 @@ void supprimerNote(){
         
         printf("Choisissez la note a supprimer :");
         scanf("%d",&k);
-        if (k>count || k<0)
+        if (k>count || k<=0)
         {
             printf("Indice invalide. Veuillez entrer un indice entre 0 et %d.\n",count);
         }
 
 
-    } while (k>count || k<0);
+    } while (k>count || k<=0);
 
 
-    for (int i = k-1; i < count; i++)
+    for (int i = k-1; i < count-1; i++)
     {
         
         notes[i]=notes[i+1];
